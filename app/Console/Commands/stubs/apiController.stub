@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\DummyCapsClassName\DummyCreateRequest;
+use App\Http\Requests\DummyCapsClassName\DummyDetailsRequest;
+use App\Http\Requests\DummyCapsClassName\DummyUpdateRequest;
+use App\Http\Requests\DummyCapsClassName\DummyDeleteRequest;
+use App\Services\DummyServ;
+
+class DummyClass extends Controller
+{
+    public function __construct(DummyServ $DummyService)
+    {
+        $this->DummyService = $DummyService;
+    }
+
+    public function list()
+    {
+        return Response()->json($this->DummyService->list());
+    }
+
+    public function store(DummyCreateRequest $request)
+    {
+        $this->DummyService->store($request->validated());
+    }
+
+    public function details(DummyDetailsRequest $request)
+    {
+        return Response()->json($this->DummyService->details($request->validated()));
+    }
+
+    public function update(DummyUpdateRequest $request)
+    {
+        return Response()->json($this->DummyService->update($request->validated()));
+    }
+
+    public function delete(DummyDeleteRequest $request)
+    {
+        $this->DummyService->delete($request->validated());
+        return Response()->json();
+    }
+}

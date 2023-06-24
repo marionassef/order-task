@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\DummyRepository;
+
+class DummyClassName
+{
+    public function __construct(DummyRepository $repository)
+    {
+        $this->DummyRepo = $repository;
+    }
+
+    public function list()
+    {
+        return $this->DummyRepo->findAll([]);
+    }
+
+    public function store($data)
+    {
+        return $this->DummyRepo->create($data);
+    }
+
+    public function getOneBy($data)
+    {
+        return $this->DummyRepo->findOneBy($data);
+    }
+
+    public function update($data)
+    {
+        return $this->DummyRepo->update($this->DummyRepo->findOneBy(['id'=> $data['id']]), $data);
+    }
+
+    public function delete($id)
+    {
+        return $this->DummyRepo->delete($id);
+    }
+}
