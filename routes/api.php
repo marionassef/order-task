@@ -22,18 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::post('register', [UserApiController::class, 'register'])->name('register');
-    Route::post('login', [UserApiController::class, 'login'])->name('login');
+    Route::post('users/register', [UserApiController::class, 'register'])->name('register');
+    Route::post('users/login', [UserApiController::class, 'login'])->name('login');
 
     Route::middleware('auth:api')->group(function () {
 
 #### user Routes
-        Route::prefix('user')->group(function () {
+        Route::prefix('users')->group(function () {
             Route::get('', [UserApiController::class, 'list'])->name('user.list');
         });
 
 #### product Routes
-        Route::prefix('product')->group(function () {
+        Route::prefix('products')->group(function () {
             Route::get('', [ProductApiController::class, 'list'])->name('product.list');
             Route::post('store', [ProductApiController::class, 'store'])->name('product.store');
             Route::get('{id}', [ProductApiController::class, 'details'])->name('product.details');
